@@ -1,0 +1,126 @@
+API Steps
+
+download the application code for APIs
+
+authenticated and authorized apis implemented for the security
+
+1. Run below commands
+
+pip install -r requirements.txt
+
+Change the path of sqlite db as per your local
+app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///F:\LeaveTracker\LTApi\LTdatabase.db' 
+
+
+Execute application using below commands
+
+ python api.py
+
+
+Call  APIs from postman
+
+1 - CREATE USER (POST)
+127.0.0.1:5000/createuser
+{"name":"Fenil", "password":"fenil","email":"fenil@test.com","role":"user"}
+
+2 - Login authentication (POST)
+127.0.0.1:5000/login
+
+Authorization Type = Basic Auth
+get token getting in response
+
+3 - Get all users (GET)
+127.0.0.1:5000/user
+
+Content-Type:application/json
+x-access-tokens:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlbmlsLnNoYWhAdGVzdC5jb20ifQ.TeYg2WbLDpRj2J-JCQlkxhng2nbgP7ztuMNCINFL49Y
+
+4 - Get user by id (GET)
+127.0.0.1:5000/user/1
+Content-Type:application/json
+x-access-tokens:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlbmlsLnNoYWhAdGVzdC5jb20ifQ.TeYg2WbLDpRj2J-JCQlkxhng2nbgP7ztuMNCINFL49Y
+
+5 - Edit user(post)
+127.0.0.1:5000/user
+
+Content-Type:application/json
+x-access-tokens:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlbmlsLnNoYWhAdGVzdC5jb20ifQ.TeYg2WbLDpRj2J-JCQlkxhng2nbgP7ztuMNCINFL49Y
+
+{"id":1,"name":"Fenil","email":"fenil.shah@test.com"."role":"Manager"}
+
+
+6 - Delete user(Delete)
+127.0.0.1:5000/user/5
+
+Content-Type:application/json
+x-access-tokens:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlbmlsLnNoYWhAdGVzdC5jb20ifQ.TeYg2WbLDpRj2J-JCQlkxhng2nbgP7ztuMNCINFL49Y
+
+
+7 - Create leave request(post)
+127.0.0.1:5000/createleaverequest
+
+Content-Type:application/json
+x-access-tokens:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlbmlsLnNoYWhAdGVzdC5jb20ifQ.TeYg2WbLDpRj2J-JCQlkxhng2nbgP7ztuMNCINFL49Y
+
+{ "fk_userid":2,"from_date":"2022-13-09","to_date":"2022-13-09","leave_reason":"test reason","status":""}
+
+8 - Get  leave request by user for logged in user's created list (GET)
+127.0.0.1:5000/leaverequest
+
+Content-Type:application/json
+x-access-tokens:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlbmlsLnNoYWhAdGVzdC5jb20ifQ.TeYg2WbLDpRj2J-JCQlkxhng2nbgP7ztuMNCINFL49Y
+
+9 - Get leave request for approval for logged in manager's approval screen(GET)
+
+127.0.0.1:5000/leaverequestforapproval
+
+Content-Type:application/json
+x-access-tokens:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlbmlsLnNoYWhAdGVzdC5jb20ifQ.TeYg2WbLDpRj2J-JCQlkxhng2nbgP7ztuMNCINFL49Y
+
+10 - Approve leave request by manager
+
+127.0.0.1:5000/leaverequestapprove
+
+Content-Type:application/json
+x-access-tokens:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlbmlsLnNoYWhAdGVzdC5jb20ifQ.TeYg2WbLDpRj2J-JCQlkxhng2nbgP7ztuMNCINFL49Y
+
+{ "id":4,"approval_comments":"test","status":"Approved"}
+
+
+
+Angular Application
+
+1. Copy the source code into local
+2. Run below command by going to the code directory
+npm i
+
+3. Once node module installation is done run below command
+npm start
+
+4. Make sure that CORS plugin for browser is installed and on to avoid CORS issue
+
+username
+1. fenil.shah@test.com (user)
+2. greg@test.com (manager)
+3. test1@test.com (manager)
+4. shah2@test.com (manager)
+
+password for all is "fenil"
+
+
+User can see 2 option on Home page (Manage Users and Create Leave Request)
+Manager can see 3 options on home page (Manage Users, Create Leave Request and Approve Leave Request)
+
+Manage User
+	Can see all the users
+	
+Create Leave Request
+	Add Leave Request
+	Delete Leave Request
+	same date leave request will not be allowd
+	
+Approve Leave Request
+	Approve or Reject Leave Request
+
+
+
